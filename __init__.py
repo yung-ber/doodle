@@ -1,70 +1,57 @@
-# did u go 2 church this sunday?
 # 5 ducks company's doodle engine for first person
-# games. open scource for all who want to make first
-# person games in python 3. covers the basics.
-import doodle
+# games. open scource for all who want to make 3D
+# games in python 3.
+import doodle, sys, math
 import pygame as game
-import time, sys, threading
-from PIL import Image
+# set up engine
+events=[]
 game.init()
-sprites=[]
-class sprite:
-    def __init__(self, image, xy=(250,250)):
-        self.img=game.image.load(image) # notice I did not use .convert()
-        self.im=Image.open(image)
-        self.size=self.im.size # Get size if image
-        self.clones=[]
-        sprites.append(self)
-        game.display.update()
-        self.xy=xy
-    def send(self, xy):
-        (x,y)=xy # unpack coordinates
-        self.xy=xy # for refresh() purposes
-        (width,height)=self.size # unpack size
-        x=x-(width/2)
-        y=y-(height/2)
-        xy=(x,y) # repack coordinates
-        disp.blit(self.img, xy)
-        game.display.update() # update display
-    def refresh(self):
-        self.send(self.xy) # send sprite to the front
-        game.display.update() # update display
-    def imgset(self, image):
-        # mimic most of __init__'s code
-        self.img=game.image.load(image)
-        self.im=Image.open(image)
-        self.size=self.im.size
-        self.refresh() # call sprite refresh
-    def clone(self):
-        self.clones.append(self) # make clone
-    def reset(self):
-        self.clones=[] # delete clones
-        self.xy=(250,250) # go to middle
-		self.refresh() # update sprite
-class background(sprite):
-    def start():
-        global BG
-        BG=sprite('bg.png')
-        BG.refresh()
-def pulltheplug():
-    game.quit()
-def window(name=' '):
-    global disp
-    disp=game.display.set_mode((800, 600), game.RESIZABLE)
-    game.display.set_caption(name)
-class clock:
-    frames=0
-    def record():
-        clock.frames+=1
-    def reset():
-        clock.frames=0
-    def fps():
-        while 1:
-            time.sleep(1)
-            print(clock.frames)
-            clock.reset()
-if __name__ == '__main__':
-    try:
-        exec(open(sys.argv[1]).read())
-    except:
-        print('ERROR: not running file or running in file.')
+w,h=400,400; cx,cy=w//2,h//2
+screen=game.display.set_mode((w,h), game.RESIZABLE)
+game.display.set_caption('Powered by DOODLE')
+clock=game.time.Clock()
+# definitions
+def gameloop(loop):
+	while True:
+		#dt = clock.tick/1000
+		events=[]
+		for event in game.event.get():
+			if event.type == game.QUIT:
+				game.quit()
+				sys.exit()
+			else:
+				events+=[event]
+		screen.fill((255,255,255))
+		loop()
+		game.display.flip()
+class shape:
+	def __init__(self, verts, edges):
+		self.verts=verts
+		self.edges=edges
+	def plot(self, cam):
+		for edge in self.edges:
+			points=[]
+			for x,y,z in self.verts[edge[0]],self.verts[edge[1]]:
+				x-=cam.pos[0]
+				y-=cam.pos[1]
+				z-=cam.pos[2]
+				z+=5
+				f=200/z
+				x,y=x*f,y*f
+				points+=[(cx+int(x),cy+int(y))]
+			game.draw.line(screen,(0,0,0),points[0],points[1],1)
+class cam:
+	def __init__(self,pos=(0,0,0),rot=(0,0),fly=False):
+		self.pos=list(pos)
+		self.rot=list(rot)
+		self.fly=fly
+	def update(self, speed, key):
+		s=speed*10
+		if self.fly:
+			if key[game.K_q]: self.pos[1]-=s
+			if key[game.K_w]: self.pos[1]+=s
+		if key[game.K_w]: self.pos[2]+=s
+		if key[game.K_s]: self.pos[2]-=s
+		if key[game.K_a]: self.pos[0]-=s
+		if key[game.K_d]: self.pos[0]+=s
+cube=shape([(-1,-1,-1),(1,-1,-1),(1,1,-1),(-1,1,-1),(-1,-1,1),(1,-1,1),(1,1,1),(-1,1,1)],[(0,1),(1,2),(2,3),(3,0),(4,5),(5,6),(6,7),(7,4),(0,4),(1,5),(2,6),(3,7)])
