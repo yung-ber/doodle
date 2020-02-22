@@ -11,7 +11,7 @@ screen=game.display.set_mode((w,h), game.RESIZABLE)
 game.display.set_caption('Powered by DOODLE')
 clock=game.time.Clock()
 # definitions
-def gameloop(loop):
+def gameloop(loop, cam):
 	while True:
 		#dt = clock.tick/1000
 		events=[]
@@ -23,7 +23,9 @@ def gameloop(loop):
 				events+=[event]
 		screen.fill((255,255,255))
 		loop()
-		game.display.flip()
+		game.display.update()
+		key=doodle.game.key.get_pressed()
+		cam.update(1,key)
 class shape:
 	def __init__(self, verts, edges):
 		self.verts=verts
