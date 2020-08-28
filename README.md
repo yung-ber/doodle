@@ -7,10 +7,22 @@ index:
   ### doodle_engine_core.matrix44
     - Matrix44 (4x4 matrix class)
     - Matrix44Error (error class for matrix44)
+    - a bunch of other stuff that you probably dont need to know about unless you are really techy, in which case you could just read the code
   ### doodle_engine_core.doodle3D
     (contains copy of pygame, OpenGL.GL, and OpenGL.GLU; also contains a copy of doodle_engine_core.matrix44)
     - Game ( EX. game=Game((800,600), title='Ree!') )
+    - Mosaic (class for mosaics)
+      - example=Mosaic(image)
+      - example.render()
+    - Cube (class for cube objects)
+      - example=Cube(position, colour)
+      - example.num_faces
+      - example.vertices
+      - example.normals
+      - example.vertex_indices
+      - example.render()
     - Vector3 (class for 3D vectors)
+    - more Vector3 definitions
   ### doodle_engine_core.doodle2D
     - game_obj ( class for gameObjects (or sprites) )
       - example=game_obj(script, position, image) (init)
