@@ -1,6 +1,8 @@
 # documentation
 index:
-  [matrix44](
+  [matrix44](https://github.com/yung-ber/doodle/blob/master/README.md#doodle_engine_corematrix44)
+  [doodle3D](https://github.com/yung-ber/doodle/blob/master/README.md#doodle_engine_coredoodle3D)
+  [doodle2D](https://github.com/yung-ber/doodle/blob/master/README.md#doodle_engine_coredoodle2D)
 ## doodle_engine_core
   ### doodle_engine_core.matrix44
     - Matrix44 (4x4 matrix class)
