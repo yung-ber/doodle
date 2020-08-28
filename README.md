@@ -10,7 +10,10 @@ index:
     - a bunch of other stuff that you probably dont need to know about unless you are really techy, in which case you could just read the code
   ### doodle_engine_core.doodle3D
     (contains copy of pygame, OpenGL.GL, and OpenGL.GLU; also contains a copy of doodle_engine_core.matrix44)
-    - Game ( EX. game=Game((800,600), title='Ree!') )
+    - Game
+      - example=Game(size, title='<????>', fullscreen=False)
+      - example.resize(width, height)
+      - str(example) >=returns=> main Game object title=<title> size=<size> - doodle3D.Game instance
     - Mosaic (class for mosaics)
       - example=Mosaic(image)
       - example.render()
