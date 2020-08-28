@@ -1,4 +1,6 @@
 # documentation
+index:
+[
 ## doodle_engine_core
   ### doodle_engine_core.matrix44
     - Matrix44 (4x4 matrix class)
