@@ -9,10 +9,10 @@ doodle game engine
     - Game ( EX. game=Game((800,600), title='Ree!') )
     - Vector3 (class for 3D vectors)
   ### doodle_engine_core.doodle2D
-    #### game_obj ( class for gameObjects (or sprites) )
-      - example=__init__(script, position, image)
-      - example.act()
-      - example.display()
+    - game_obj ( class for gameObjects (or sprites) )
+      - example=game_obj(script, position, image) (init)
+      - example.act() (exec script)
+      - example.display() (render gameObject)
     (contains copy of pygame (as doodle2D.game))
     - screen (pygame.surface)
     - black (colour tuple)
@@ -21,3 +21,8 @@ doodle game engine
     - events() (copy of pygame.event.get)
     - quit_game() (quit the game)
     - gameloop(gameobjects) (main game loop)
+## example 2d project
+  from doodle_engine_core.doodle2D import*
+  img=game.image.load('image.png').convert_alpha() # replace with your own image
+  obj=game_obj('x,y=self.xy\nx+=1\ny+=1\nself.xy=(x,y)', (0,0), img)
+  gameloop([obj])
