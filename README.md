@@ -22,7 +22,8 @@ doodle game engine
     - quit_game() (quit the game)
     - gameloop(gameobjects) (main game loop)
 ## example 2d project
-  from doodle_engine_core.doodle2D import*
-  img=game.image.load('image.png').convert_alpha() # replace with your own image
-  obj=game_obj('x,y=self.xy\nx+=1\ny+=1\nself.xy=(x,y)', (0,0), img)
-  gameloop([obj])
+  ### project
+    from doodle_engine_core.doodle2D import*
+    img=game.image.load('image.png').convert_alpha() # replace with your own image
+    obj=game_obj('x,y=self.xy\nx+=1\ny+=1\nself.xy=(x,y)', (0,0), img)
+    gameloop([obj])
