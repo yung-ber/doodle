@@ -1,0 +1,12 @@
+#!/usr/bin/python3m
+import sys, os
+if sys.argv[1] == 'new':
+	folder='./projects/'+sys.argv[2]
+	os.mkdir(folder)
+	f=open(folder+'/core.py','w')
+	f.write('from doodle_engine_core import *\n# Code here...')
+	f.close()
+if sys.argv[1] == 'exec':
+	code=open('projects/'+sys.argv[2]+'/core.py')
+	code=code.read()
+	exec(code)
